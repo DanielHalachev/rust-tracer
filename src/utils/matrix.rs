@@ -109,6 +109,6 @@ impl Mul<Matrix<3>> for Vector {
 
 impl MulAssign<Matrix<3>> for Vector {
     fn mul_assign(&mut self, rhs: Matrix<3>) {
-        *self = *self * rhs;
+        *self = self.clone() * rhs;
     }
 }

@@ -1,15 +1,18 @@
 use core::fmt;
 
-pub struct Color(f32, f32, f32);
-pub struct Albedo(f32, f32, f32);
+pub use crate::tracer::vector::Triple;
+pub use Triple as Color;
+pub use Triple as Albedo;
+
+#[derive(Clone)]
 pub struct PPMColor(u8, u8, u8);
 
-impl PPMColor {
-    pub fn from_color(color: Color) -> Self {
+impl From<Color> for PPMColor {
+    fn from(value: Color) -> Self {
         PPMColor(
-            (color.0.clamp(0.0, 1.0) * 255.0) as u8,
-            (color.1.clamp(0.0, 1.0) * 255.0) as u8,
-            (color.2.clamp(0.0, 1.0) * 255.0) as u8,
+            (value.0.clamp(0.0, 1.0) * 255.0) as u8,
+            (value.1.clamp(0.0, 1.0) * 255.0) as u8,
+            (value.2.clamp(0.0, 1.0) * 255.0) as u8,
         )
     }
 }
